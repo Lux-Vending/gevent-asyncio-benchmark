@@ -4,7 +4,7 @@ import time
 from memory_profiler import profile
 
 # Constants
-N_REQUESTS = 5000
+N_REQUESTS = 1000
 TEST_URL = "https://www.example.com"
 
 def measure_memory():

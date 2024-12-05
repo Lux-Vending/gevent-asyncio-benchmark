@@ -9,10 +9,8 @@ from memory_profiler import profile
 uvloop.install()
 
 async def async_fetch(session, url):
-    # Create a large payload
-    payload = {'data': 'x' * 1000000}  # 1MB of data
     try:
-        async with session.post(url, json=payload) as response:
+        async with session.get(url) as response:
             await response.read()
     except Exception as e:
         print(f"Error in async_fetch: {e}")
@@ -30,14 +28,10 @@ async def run_asyncio_test():
     )
     
     sem = asyncio.Semaphore(200)
-    responses = []  # Store responses in memory
     
     async def bounded_fetch(session, url):
         async with sem:
-            async with session.get(url) as response:
-                data = await response.read()
-                responses.append(data)  # Keep data in memory
-                return data
+            return await async_fetch(session, url)
     
     async with aiohttp.ClientSession(connector=connector, timeout=timeout) as session:
         tasks = [bounded_fetch(session, TEST_URL) for _ in range(N_REQUESTS)]

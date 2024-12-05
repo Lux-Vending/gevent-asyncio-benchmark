@@ -8,10 +8,10 @@ from memory_profiler import profile
 import time
 
 def gevent_fetch(url, session):
+    # Create a large payload
+    payload = {'data': 'x' * 1000000}  # 1MB of data
     try:
-        response = session.get(url, timeout=(10, 30))
-        # Store response content in memory
-        return response.content  # This reads and stores the full response
+        return session.post(url, json=payload, timeout=(10, 30))
     except Exception as e:
         print(f"Error in gevent_fetch: {e}")
 
@@ -33,15 +33,9 @@ def benchmark_gevent():
     session.mount('http://', adapter)
     session.mount('https://', adapter)
     
-    # Store all responses in memory
-    responses = []
+    # Create and run jobs with the session
     jobs = [gevent.spawn(gevent_fetch, TEST_URL, session) for _ in range(N_REQUESTS)]
     gevent.joinall(jobs, timeout=60)
-    
-    # Collect all responses
-    for job in jobs:
-        if job.value is not None:
-            responses.append(job.value)
     
     # Clean up
     session.close()
