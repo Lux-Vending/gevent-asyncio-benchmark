@@ -1,0 +1,35 @@
+Running 3 benchmarks for Asyncio...
+Making 1000 concurrent requests per run
+... Run 1
+Asyncio averages:
+Time: 1.20 seconds
+Memory: 20.95 MB
+CPU: 10.63%
+... Run 2
+Asyncio averages:
+Time: 1.21 seconds
+Memory: 19.77 MB
+CPU: 12.52%
+... Run 3
+Asyncio averages:
+Time: 1.21 seconds
+Memory: 21.60 MB
+CPU: 12.77%
+
+Running 3 benchmarks for Gevent...
+Making 1000 concurrent requests per run
+... Run 1
+Gevent averages:
+Time: 6.25 seconds
+Memory: 50.71 MB
+CPU: 19.12%
+... Run 2
+Gevent averages:
+Time: 6.23 seconds
+Memory: 42.99 MB
+CPU: 17.60%
+... Run 3
+Gevent averages:
+Time: 6.35 seconds
+Memory: 47.34 MB
+CPU: 18.85%

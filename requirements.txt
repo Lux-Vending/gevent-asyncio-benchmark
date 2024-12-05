@@ -1,0 +1,5 @@
+aiohttp
+gevent
+psutil
+requests
+memory-profiler 
