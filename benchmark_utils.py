@@ -1,10 +1,11 @@
 import psutil
 import statistics
-import time
 from memory_profiler import profile
 
 # Constants
 N_REQUESTS = 1000
+N_CONCURRENT_REQUESTS = 200
+TEST_TIMEOUT = 30
 TEST_URL = "https://www.example.com"
 
 def measure_memory():
@@ -20,7 +21,7 @@ def run_benchmark(benchmark_func, name, n_runs=3):
     results = []
     
     print(f"Running {n_runs} benchmarks for {name}...")
-    print(f"Making {N_REQUESTS} concurrent requests per run")
+    print(f"Making {N_CONCURRENT_REQUESTS} concurrent requests for a total of {N_REQUESTS} requests per run")
     
     for i in range(n_runs):
         print(f"\nRun {i+1}/{n_runs}")

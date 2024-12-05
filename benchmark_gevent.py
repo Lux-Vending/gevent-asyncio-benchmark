@@ -3,15 +3,13 @@ monkey.patch_all()
 
 import gevent
 import requests
-from benchmark_utils import measure_memory, measure_cpu, run_benchmark, N_REQUESTS, TEST_URL
+from benchmark_utils import measure_memory, measure_cpu, run_benchmark, N_REQUESTS, TEST_URL, N_CONCURRENT_REQUESTS
 from memory_profiler import profile
 import time
 
 def gevent_fetch(url, session):
-    # Create a large payload
-    payload = {'data': 'x' * 1000000}  # 1MB of data
     try:
-        return session.post(url, json=payload, timeout=(10, 30))
+        return session.get(url, timeout=(10, 30))
     except Exception as e:
         print(f"Error in gevent_fetch: {e}")
 
@@ -26,8 +24,8 @@ def benchmark_gevent():
     # Create a session with connection pooling
     session = requests.Session()
     adapter = requests.adapters.HTTPAdapter(
-        pool_connections=200,
-        pool_maxsize=200,
+        pool_connections=N_CONCURRENT_REQUESTS,
+        pool_maxsize=N_CONCURRENT_REQUESTS,
         pool_block=False
     )
     session.mount('http://', adapter)

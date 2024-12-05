@@ -2,7 +2,7 @@ import uvloop
 import asyncio
 import aiohttp
 import time
-from benchmark_utils import measure_memory, measure_cpu, run_benchmark, N_REQUESTS, TEST_URL
+from benchmark_utils import measure_memory, measure_cpu, run_benchmark, N_REQUESTS, TEST_URL, N_CONCURRENT_REQUESTS
 from memory_profiler import profile
 
 # Install uvloop
@@ -27,7 +27,7 @@ async def run_asyncio_test():
         sock_read=30     # Socket read timeout
     )
     
-    sem = asyncio.Semaphore(200)
+    sem = asyncio.Semaphore(N_CONCURRENT_REQUESTS)
     
     async def bounded_fetch(session, url):
         async with sem:

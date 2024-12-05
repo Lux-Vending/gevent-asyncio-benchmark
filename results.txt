@@ -25,9 +25,9 @@ Memory: 50.71 MB
 CPU: 19.12%
 ... Run 2
 Gevent averages:
-Time: 6.23 seconds
-Memory: 42.99 MB
-CPU: 17.60%
+Time: 6.26 seconds
+Memory: 45.18 MB
+CPU: 19.78%
 ... Run 3
 Gevent averages:
 Time: 6.35 seconds
