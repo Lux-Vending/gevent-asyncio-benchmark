@@ -1,5 +1,5 @@
 Running 3 benchmarks for Asyncio...
-Making 1000 concurrent requests per run
+Making 200 concurrent requests for a total of 1000 requests per run
 ... Run 1
 Asyncio averages:
 Time: 1.20 seconds
@@ -17,7 +17,7 @@ Memory: 21.60 MB
 CPU: 12.77%
 
 Running 3 benchmarks for Gevent...
-Making 1000 concurrent requests per run
+Making 200 concurrent requests for a total of 1000 requests per run
 ... Run 1
 Gevent averages:
 Time: 6.25 seconds
